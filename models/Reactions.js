@@ -1,4 +1,5 @@
 const { Schema, Types } = require('mongoose');
+const dateFormat = require('date-format');
 
 
 const reactionSchema = new Schema(
@@ -19,8 +20,17 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: (timestamp) => dateFormat(timestamp, "dddd, mmmm, yyyy, h:MM:ss TT")
-        }
+            get: function() {
+                return dateFormat('yyyy-MM-dd hh:mm:ss', this._createdAt);
+            },
+        },
+    },
+    {
+        // Configuration options
+        toJSON: {
+            getters: true,
+        },
+        id: false,
     }
 );
 

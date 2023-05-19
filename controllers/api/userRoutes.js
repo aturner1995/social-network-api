@@ -78,21 +78,21 @@ router.post('/:userId/friends/:friendId', async (req, res) => {
     try {
         const user = await User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $addToset: { friends: req.params.friendId } },
+            { $addToSet: { friends: req.params.friendId } },
             { runValidators: true, new: true }
         );
 
         if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });
         }
-
+        res.status(200).json(user);
     }
     catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
-
+// DELETE a friend
 router.delete('/:userId/friends/:friendId', async (req, res) => {
     try {
         const user = await User.findOneAndUpdate(
