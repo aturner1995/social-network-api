@@ -18,7 +18,7 @@ clone or fork the repo and run npm install
 
 ## Usage ⚙️
 * To run the program - npm start
-* Instructional Video - 
+* Instructional Video - [API-Info.webm](https://github.com/aturner1995/social-network-api/assets/120421650/9b82d9e9-1e77-4ddf-a8d4-1ef18b58703a)
 
 ## Contribution 🙏
 Please email the repo user for instructions
