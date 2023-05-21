@@ -4,7 +4,7 @@ const { User, Thought } = require('../../models');
 // GET all users
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find().select('-__v');
         res.status(200).json(users);
     } catch (err) {
         res.status(500).json(err);
@@ -46,7 +46,7 @@ router.put('/:userId', async (req, res) => {
             { _id: req.params.userId },
             { $set: req.body },
             { runValidators: true, new: true }
-        );
+        ).select('-__v');
 
         if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });
@@ -61,7 +61,7 @@ router.put('/:userId', async (req, res) => {
 // DELETE a user by ID
 router.delete('/:userId', async (req, res) => {
     try {
-        const user = await User.findOneAndDelete({ _id: req.params.userId });
+        const user = await User.findOneAndDelete({ _id: req.params.userId }).select('-__v');
 
         if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });

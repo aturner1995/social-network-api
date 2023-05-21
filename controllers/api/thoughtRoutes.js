@@ -4,7 +4,7 @@ const { User, Thought }  = require('../../models');
 // GET all thoughts
 router.get('/', async (req, res) => {
     try {
-        const thoughts = await Thought.find();
+        const thoughts = await Thought.find().select('-__v');
         res.status(200).json(thoughts);
     }
     catch (err) {
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET a specific thought by ID
 router.get('/:thoughtId', async (req, res) => {
     try {
-        const thought = await Thought.findOne({ _id: req.params.thoughtId });
+        const thought = await Thought.findOne({ _id: req.params.thoughtId }).select('-__v');
 
         if (!thought) {
             return res.status(404).json({ message: 'No thought with that ID' });
